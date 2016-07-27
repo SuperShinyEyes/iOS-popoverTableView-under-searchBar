@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5942756C1D48E0A600AAF6D9 /* SearchBarPopOverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5942756B1D48E0A600AAF6D9 /* SearchBarPopOverController.swift */; };
+		5942756E1D48E9BA00AAF6D9 /* ExamplePopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5942756D1D48E9BA00AAF6D9 /* ExamplePopoverController.swift */; };
 		59A205DA1D45F1F300991574 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A205D91D45F1F300991574 /* AppDelegate.swift */; };
 		59A205DC1D45F1F300991574 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A205DB1D45F1F300991574 /* ViewController.swift */; };
 		59A205DF1D45F1F300991574 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59A205DD1D45F1F300991574 /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5942756B1D48E0A600AAF6D9 /* SearchBarPopOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarPopOverController.swift; sourceTree = "<group>"; };
+		5942756D1D48E9BA00AAF6D9 /* ExamplePopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamplePopoverController.swift; sourceTree = "<group>"; };
 		59A205D61D45F1F300991574 /* search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = search.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59A205D91D45F1F300991574 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59A205DB1D45F1F300991574 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,7 +60,9 @@
 			children = (
 				59A205D91D45F1F300991574 /* AppDelegate.swift */,
 				59A205DB1D45F1F300991574 /* ViewController.swift */,
+				5942756D1D48E9BA00AAF6D9 /* ExamplePopoverController.swift */,
 				59A205DD1D45F1F300991574 /* Main.storyboard */,
+				5942756B1D48E0A600AAF6D9 /* SearchBarPopOverController.swift */,
 				59A205E01D45F1F300991574 /* Assets.xcassets */,
 				59A205E21D45F1F300991574 /* LaunchScreen.storyboard */,
 				59A205E51D45F1F300991574 /* Info.plist */,
@@ -136,6 +142,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5942756E1D48E9BA00AAF6D9 /* ExamplePopoverController.swift in Sources */,
+				5942756C1D48E0A600AAF6D9 /* SearchBarPopOverController.swift in Sources */,
 				59A205DC1D45F1F300991574 /* ViewController.swift in Sources */,
 				59A205DA1D45F1F300991574 /* AppDelegate.swift in Sources */,
 			);
@@ -289,6 +297,7 @@
 				59A205EA1D45F1F300991574 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
