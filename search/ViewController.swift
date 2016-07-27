@@ -10,30 +10,45 @@ import UIKit
 
 class ViewController: UIViewController, UIPopoverPresentationControllerDelegate, UISearchBarDelegate {
     
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        print("searchBarTextDidBeginEditing")
+    var location: CGPoint? {
+        didSet {
+            print("location: \(location)")
+        }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        print("searchBarSearchButtonClicked")
-        self.searchBar.resignFirstResponder()
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch = touches.first
+        location = touch!.locationInView(self.view)
+    }
+    
+    func showPopoverView(){
         let examplePopoverController = ExamplePopoverController()
         examplePopoverController.modalPresentationStyle = .Popover
         let popoverViewController = examplePopoverController.popoverPresentationController
-        let location = UIGestureRecognizer().locationInView(nil)
+        //        let location = UIGestureRecognizer().locationInView(self.view)
         popoverViewController?.permittedArrowDirections = .Any
         popoverViewController?.delegate = self
         popoverViewController?.sourceView = contentViewController.view
         popoverViewController?.sourceRect = CGRect(
-            x: location.x,
-            y: location.y,
+            x: location!.x ?? 430,
+            y: location!.y ?? 430,
             width: 1,
             height: 1)
         presentViewController(
             examplePopoverController,
             animated: true,
             completion: nil)
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        showPopoverView()
+        print("searchBarTextDidBeginEditing")
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        print("searchBarSearchButtonClicked")
+        self.searchBar.resignFirstResponder()
+        
         
     }
     
