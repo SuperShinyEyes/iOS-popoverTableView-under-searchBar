@@ -10,7 +10,14 @@ import UIKit
 
 class ViewController: UIViewController, UIPopoverPresentationControllerDelegate, UISearchBarDelegate {
     
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        print("searchBarTextDidBeginEditing")
+    }
+    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        print("searchBarSearchButtonClicked")
+        self.searchBar.resignFirstResponder()
         let examplePopoverController = ExamplePopoverController()
         examplePopoverController.modalPresentationStyle = .Popover
         let popoverViewController = examplePopoverController.popoverPresentationController
@@ -30,6 +37,11 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         
     }
     
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self.searchBar.resignFirstResponder()
+        self.searchBar.text = ""
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Show Popover" {
             let popoverViewController = segue.destinationViewController
@@ -44,6 +56,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        searchBar.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
