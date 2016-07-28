@@ -109,6 +109,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
     func keyboardWillDisappear(notification: NSNotification){
         print("Keyboard disappeared!")
         dismissPopoverView()
+        //        popoverView = nil
+        isPopoverViewOn = false
     }
     
     override func didReceiveMemoryWarning() {
