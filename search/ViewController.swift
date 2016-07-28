@@ -15,18 +15,11 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         return CGPoint(x: self.searchBar.bounds.midX, y: y)
     }
     
-    
-    //    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    //        let touch = touches.first
-    //        location = touch!.locationInView(self.view)
-    //        
-    //    }
-    
     func showPopoverView(){
         let examplePopoverController = ExamplePopoverController()
         examplePopoverController.modalPresentationStyle = .Popover
         let popoverViewController = examplePopoverController.popoverPresentationController
-        //        let location = UIGestureRecognizer().locationInView(self.view)
+        
         popoverViewController?.permittedArrowDirections = .Any
         popoverViewController?.delegate = self
         popoverViewController?.sourceView = contentViewController.view
@@ -60,8 +53,9 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Show Popover" {
-            let popoverViewController = segue.destinationViewController
+            let popoverViewController = segue.destinationViewController as! ExamplePopoverController
             popoverViewController.popoverPresentationController?.delegate = self
+            
         }
     }
     
