@@ -48,6 +48,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         
     }
     
+    
+    
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         
         print("searchBarTextDidBeginEditing")
@@ -63,16 +65,22 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         popoverView?.tableView.reloadData()
     }
     
+    func dismissPopoverView(){
+        self.dismissViewControllerAnimated(true) { [weak self] in
+            self?.popoverView?.dismissViewControllerAnimated(true, completion: nil)
+        }
+        //        popoverView?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         print("searchBarSearchButtonClicked")
         self.searchBar.resignFirstResponder()
-        
-        
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         self.searchBar.resignFirstResponder()
         self.searchBar.text = ""
+        dismissPopoverView()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -95,11 +103,22 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         searchBar.delegate = self
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:Selector("keyboardWillDisappear:"), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWillDisappear(notification: NSNotification){
+        print("Keyboard disappeared!")
+        dismissPopoverView()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     @IBOutlet weak var searchBar: UISearchBar!

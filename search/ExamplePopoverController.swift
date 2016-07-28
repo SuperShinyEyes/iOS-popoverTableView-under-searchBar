@@ -39,6 +39,9 @@ class ExamplePopoverController: UIViewController, UITableViewDelegate, UITableVi
         tableView.frame = newTableViewFrame
     }
     
+    deinit {
+        print("deinitialized")
+    }
     
     override func viewDidLoad() {
         print("ViewDidLoad")
