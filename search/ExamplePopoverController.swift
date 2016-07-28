@@ -27,10 +27,11 @@ class ExamplePopoverController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     var newTableViewFrame: CGRect {
-        print("###TableView x: \(self.view.bounds.origin.x), y: \(self.view.bounds.origin.y), width:\(self.view.bounds.width), height:\(self.view.bounds.height)")
+        print("###TableView x: \(self.view.bounds.origin.x), y: \(self.view.bounds.origin.y), width:\(self.view.bounds.width), height:\(self.view.bounds.height),   popoverViewWidth:\(popoverViewWidth)")
         
-        //        return CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.width, tableHeight)
-        return CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, 375, tableHeight)
+        return CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, tableView.bounds.width, tableHeight)
+        //        return CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, 375, tableHeight)
+        //        return CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.width, tableHeight)
     }
     
     func setTableViewHeight() {
@@ -41,6 +42,12 @@ class ExamplePopoverController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         print("ViewDidLoad")
+        let frame = CGRectMake(self.view.bounds.origin.x,
+                               self.view.bounds.origin.y,
+                               375,
+                               tableHeight)
+        tableView = UITableView(frame:frame, style: UITableViewStyle.Plain)
+        //        tableView = UITableView(frame:self.view.bounds, style: UITableViewStyle.Plain)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
