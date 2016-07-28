@@ -12,33 +12,34 @@ class ExamplePopoverController: UIViewController, UITableViewDelegate, UITableVi
     
     var tableView = UITableView()
     let animals = ["Dog", "cat", "pigeon", "lion", "buffalow"]
-    var popoverViewWidth: CGFloat?
-    var bounds: CGRect?
+    var popoverViewWidth: CGFloat { return self.preferredContentSize.width }
     var searchKeyword: String?
+    
     var filteredAnimals: [String] {
         return animals.filter{ $0.lowercaseString.containsString(searchKeyword!.lowercaseString) }
     }
+    var tableHeight: CGFloat {
+        return CGFloat(filteredAnimals.count) * 44
+    }
+    
+    var newPopoverViewFrameSize: CGSize {
+        return CGSize(width: popoverViewWidth, height: tableHeight)
+    }
+    
+    var newTableViewFrame: CGRect {
+        return CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.width, tableHeight)
+    }
     
     func setTableViewHeight() {
-        let tableHeight: CGFloat = CGFloat(filteredAnimals.count) * 44
-        print("tableHeight: \(tableHeight)")
-        print("    CGFloat(filteredAnimals.count): \(CGFloat(filteredAnimals.count))")
-        print("    tableView.rowHeight: \(tableView.rowHeight)")
-        
-        self.preferredContentSize = CGSize(width: popoverViewWidth!, height: tableHeight)
-        tableView.frame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.width, tableHeight)
-        
+        self.preferredContentSize = newPopoverViewFrameSize
+        tableView.frame = newTableViewFrame
     }
     
     
     override func viewDidLoad() {
-//        self.preferredContentSize.width
-        popoverViewWidth = self.preferredContentSize.width
-            //self.view.frame.width
-        //        let bounds = self.bounds ?? UIScreen.mainScreen().bounds
         tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
-        tableView.delegate      =   self
-        tableView.dataSource    =   self
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(tableView)
     }
