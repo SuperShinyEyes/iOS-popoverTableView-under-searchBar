@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UIPopoverPresentationControllerDelegate, UISearchBarDelegate {
     
     
-    var searchBarCGPointForArrow: CGPoint {
+    var popoverViewAnchor: CGPoint {
         let y = self.navigationController!.navigationBar.frame.height + self.searchBar.bounds.height * 1.5
         return CGPoint(x: self.searchBar.bounds.midX, y: y)
     }
@@ -23,24 +23,24 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
     func showPopoverView(){
         popoverView = ExamplePopoverController()
         popoverView!.modalPresentationStyle = .Popover
-//        popoverView!.bounds = searchBarBounds
         popoverView!.searchKeyword = "lion"
         
         let popoverViewController = popoverView!.popoverPresentationController
         
-        popoverViewController?.permittedArrowDirections = .Any
+        popoverViewController?.permittedArrowDirections = .Up
         popoverViewController?.delegate = self
         popoverViewController?.sourceView = contentViewController.view
         
         popoverViewController?.sourceRect = CGRect(
-            x: searchBarCGPointForArrow.x ?? 430,
-            y: searchBarCGPointForArrow.y ?? 430,
+            x: popoverViewAnchor.x ?? 430,
+            y: popoverViewAnchor.y ?? 430,
             width: 1,
             height: 1)
         presentViewController(
             popoverView!,
             animated: true,
             completion: nil)
+        
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
@@ -49,13 +49,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        //        guard popoverView != nil else { return }
         popoverView?.searchKeyword = searchText
         popoverView?.setTableViewHeight()
-        //        let popoverViewFrame = popoverView?.popoverPresentationController?.sourceView view.frame
-        //        let tableHeight: CGFloat = CGFloat((popoverView?.filteredAnimals.count)!) * 44
-        //        popoverView?.view.frame = CGRectMake(popoverViewFrame!.origin.x, popoverViewFrame!.origin.y, popoverViewFrame!.width, tableHeight)
-        //        self.view.frame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.width, tableHeight)
         popoverView?.tableView.reloadData()
     }
     

@@ -33,6 +33,7 @@ class ExamplePopoverController: UIViewController, UITableViewDelegate, UITableVi
     func setTableViewHeight() {
         self.preferredContentSize = newPopoverViewFrameSize
         tableView.frame = newTableViewFrame
+        print(self.popoverPresentationController?.arrowDirection)
     }
     
     
