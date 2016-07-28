@@ -32,7 +32,9 @@ class ExamplePopoverController: UIViewController, UITableViewDelegate, UITableVi
     
     
     override func viewDidLoad() {
-        popoverViewWidth = self.view.frame.width
+//        self.preferredContentSize.width
+        popoverViewWidth = self.preferredContentSize.width
+            //self.view.frame.width
         //        let bounds = self.bounds ?? UIScreen.mainScreen().bounds
         tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
         tableView.delegate      =   self
