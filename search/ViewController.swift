@@ -10,16 +10,17 @@ import UIKit
 
 class ViewController: UIViewController, UIPopoverPresentationControllerDelegate, UISearchBarDelegate {
     
-    var location: CGPoint? {
-        didSet {
-            print("location: \(location)")
-        }
+    var location: CGPoint {
+        let y = self.navigationController!.navigationBar.frame.height + self.searchBar.bounds.height * 1.5
+        return CGPoint(x: self.searchBar.bounds.midX, y: y)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch = touches.first
-        location = touch!.locationInView(self.view)
-    }
+    
+    //    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    //        let touch = touches.first
+    //        location = touch!.locationInView(self.view)
+    //        
+    //    }
     
     func showPopoverView(){
         let examplePopoverController = ExamplePopoverController()
@@ -30,8 +31,8 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         popoverViewController?.delegate = self
         popoverViewController?.sourceView = contentViewController.view
         popoverViewController?.sourceRect = CGRect(
-            x: location!.x ?? 430,
-            y: location!.y ?? 430,
+            x: location.x ?? 430,
+            y: location.y ?? 430,
             width: 1,
             height: 1)
         presentViewController(
