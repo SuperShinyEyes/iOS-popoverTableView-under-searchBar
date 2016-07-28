@@ -25,7 +25,7 @@ class ExamplePopoverController: UIViewController, UITableViewDelegate, UITableVi
         print("    CGFloat(filteredAnimals.count): \(CGFloat(filteredAnimals.count))")
         print("    tableView.rowHeight: \(tableView.rowHeight)")
         
-        self.preferredContentSize = CGSize(width: tableView.frame.width, height: popoverViewWidth!)
+        self.preferredContentSize = CGSize(width: popoverViewWidth!, height: tableHeight)
         tableView.frame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.width, tableHeight)
         
     }
