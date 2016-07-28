@@ -20,16 +20,19 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
     
     var popoverView: ExamplePopoverController?
     
+    var isPopoverViewOn = false
+    
     func showPopoverView(){
         popoverView = ExamplePopoverController()
         popoverView!.modalPresentationStyle = .Popover
-        popoverView!.searchKeyword = "lion"
+        //        popoverView!.searchKeyword = "lion"
         
         let popoverViewController = popoverView!.popoverPresentationController
         
         popoverViewController?.permittedArrowDirections = .Up
         popoverViewController?.delegate = self
         popoverViewController?.sourceView = contentViewController.view
+        popoverViewController?.backgroundColor = UIColor.orangeColor()
         
         popoverViewController?.sourceRect = CGRect(
             x: popoverViewAnchor.x ?? 430,
@@ -41,14 +44,19 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             animated: true,
             completion: nil)
         
+        isPopoverViewOn = true
+        
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        showPopoverView()
+        
         print("searchBarTextDidBeginEditing")
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if !isPopoverViewOn {
+            showPopoverView()
+        }
         popoverView?.searchKeyword = searchText
         popoverView?.setTableViewHeight()
         popoverView?.tableView.reloadData()
