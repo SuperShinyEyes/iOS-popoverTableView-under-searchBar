@@ -9,30 +9,42 @@
 import UIKit
 
 class ExamplePopoverController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    //class ExamplePopoverController: UIViewController {
+    
     var tableView = UITableView()
     let animals = ["Dog", "cat", "pigeon", "lion", "buffalow"]
+    var popoverViewWidth: CGFloat?
     var bounds: CGRect?
     var searchKeyword: String?
     var filteredAnimals: [String] {
-        return animals.filter{ $0.lowercaseString.containsString(searchKeyword!) }
+        return animals.filter{ $0.lowercaseString.containsString(searchKeyword!.lowercaseString) }
+    }
+    
+    func setTableViewHeight() {
+        let tableHeight: CGFloat = CGFloat(filteredAnimals.count) * 44
+        print("tableHeight: \(tableHeight)")
+        print("    CGFloat(filteredAnimals.count): \(CGFloat(filteredAnimals.count))")
+        print("    tableView.rowHeight: \(tableView.rowHeight)")
+        
+        self.preferredContentSize = CGSize(width: tableView.frame.width, height: popoverViewWidth!)
+        tableView.frame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.width, tableHeight)
+        
     }
     
     
     override func viewDidLoad() {
-        let bounds = self.bounds ?? UIScreen.mainScreen().bounds
-        tableView = UITableView(frame: bounds, style: UITableViewStyle.Plain)
+        popoverViewWidth = self.view.frame.width
+        //        let bounds = self.bounds ?? UIScreen.mainScreen().bounds
+        tableView = UITableView(frame: self.view.frame, style: UITableViewStyle.Plain)
         tableView.delegate      =   self
         tableView.dataSource    =   self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(tableView)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        <#code#>
-    }
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("\(filteredAnimals), filteredAnimals.count: \(filteredAnimals.count)")
         return filteredAnimals.count
     }
     
