@@ -58,6 +58,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             showPopoverView()
         }
         popoverView?.searchKeyword = searchText
+        print("Calling popoverView?.setTableViewHeight()")
         popoverView?.setTableViewHeight()
         popoverView?.tableView.reloadData()
     }
