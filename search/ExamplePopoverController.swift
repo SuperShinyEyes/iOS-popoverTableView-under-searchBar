@@ -19,7 +19,8 @@ class ExamplePopoverController: UIViewController, UITableViewDelegate, UITableVi
         return animals.filter{ $0.lowercaseString.containsString(searchKeyword.lowercaseString) }
     }
     var tableHeight: CGFloat {
-        return CGFloat(filteredAnimals.count) * 44
+        return CGFloat(1) * 44
+        //        return CGFloat(filteredAnimals.count) * 44
     }
     
     var newPopoverViewFrameSize: CGSize {
@@ -30,8 +31,6 @@ class ExamplePopoverController: UIViewController, UITableViewDelegate, UITableVi
         print("###TableView x: \(self.view.bounds.origin.x), y: \(self.view.bounds.origin.y), width:\(self.view.bounds.width), height:\(self.view.bounds.height),   popoverViewWidth:\(popoverViewWidth)")
         
         return CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, tableView.bounds.width, tableHeight)
-        //        return CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, 375, tableHeight)
-        //        return CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.width, tableHeight)
     }
     
     func setTableViewHeight() {
